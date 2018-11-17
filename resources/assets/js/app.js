@@ -9,17 +9,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-/*Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
-});*/
 
 // ----- Modal Delete ----------
 $('#deleteModal').on('show.bs.modal', function (event) {
@@ -49,6 +38,42 @@ $('.deleteCustomer').on('click', function(){
           $('#deleteModal').modal('hide')
         } else {
           alert('No se pudo eliminar el cliente')
+        }
+        
+    }
+  })
+});
+
+// ----- Modal Save ----------
+$('#save').on('click', function(){
+  var name = $('#name').val()
+  var lastname = $('#lastname').val()
+  var email = $('#email').val()
+  var phone = $('#phone').val()
+  var creditcard = $('#creditcard').val()
+
+  $.ajax({
+    type:'POST',
+    url:'save',
+    data:{
+      'name':name,
+      'lastname': lastname,
+      'email': email,
+      'phone': phone,
+      'creditcard': creditcard,
+      '_token': token
+    },
+    success: function(data){
+        console.log(data)
+        if (data.save === true) {
+          console.log('Guardado')
+
+          var newrow = `<tr><td>${name}</td><td>${lastname}</td><td>${email}</td><td>${phone}</td><td></td><td></td></tr>`
+
+          $('#addModal').modal('hide')
+          $('table tbody').append(newrow)
+        } else {
+          alert(data.msg)
         }
         
     }

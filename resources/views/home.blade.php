@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h1>Listado de Clientes</h1>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Agregar</button>
                 </div>
 
                 <div class="panel-body">
@@ -16,34 +17,35 @@
                         </div>
                     @endif
 
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" id="customers-table">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
                                 <th>E-mail</th>
                                 <th>Teléfono</th>
-                                <th colspan="3"></th>
+                                <th colspan="2"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($customers as $customer)
                                 <tr id="row-{{$customer->id}}">
-                                    <th>{{$customer->name}}</th>
-                                    <th>{{$customer->lastname}}</th>
-                                    <th>{{$customer->email}}</th>
-                                    <th>{{$customer->phone}}</th>
-                                    <th>
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                                          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                        </button>
-                                    </th>
-                                    <th>
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                                    <td>{{$customer->name}}</td>
+                                    <td>{{$customer->lastname}}</td>
+                                    <td>{{$customer->email}}</td>
+                                    <td>{{$customer->phone}}</td>
+                                    <td>
+                                        <button 
+                                            type="button" class="btn btn-default" 
+                                            data-toggle="modal" data-target="#addModal" 
+                                            data-id="{{$customer->id}}" 
+                                            data-name="{{$customer->name}}" 
+                                            data-lastname="{{$customer->lastname}}" 
+                                            aria-label="Left Align">
                                           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </button>
-                                    </th>
-                                    <th>
+                                    </td>
+                                    <td>
                                         <button 
                                             type="button" class="btn btn-danger" 
                                             data-toggle="modal" data-target="#deleteModal" 
@@ -53,7 +55,7 @@
                                             aria-label="Left Align">
                                           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                         </button>
-                                    </th>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -64,7 +66,7 @@
     </div>
 </div>
 <!-- DELETE MODAL -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,6 +83,47 @@
     </div>
   </div>
 </div>
+
+<!-- ADD MODAL -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Agregar Cliente</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name" class="control-label">Nombre:</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="control-label">Apellidos:</label>
+            <input type="text" class="form-control" id="lastname" name="lastname">
+          </div>
+          <div class="form-group">
+            <label for="email" class="control-label">E-mail:</label>
+            <input type="text" class="form-control" id="email" name="email">
+          </div>
+          <div class="form-group">
+            <label for="phone" class="control-label">Teléfono:</label>
+            <input type="text" class="form-control" id="phone" name="phone" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label for="creditcard" class="control-label">Tarjeta de Crédito:</label>
+            <input type="text" class="form-control" id="creditcard" name="creditcard" maxlength="16">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="save">Gardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
     var token = '{{ csrf_token() }}';
 </script>

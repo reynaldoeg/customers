@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/delete', 'HomeController@delete');
+Route::post('/save', 'HomeController@save');
