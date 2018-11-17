@@ -46,7 +46,7 @@ class HomeController extends Controller
            'name'       => 'required|string|max:50',
            'lastname'   => 'required|string|max:50',
            'email'      => ['required','email',Rule::unique('customers')->ignore($request->id)],
-           'phone'      => 'required|numeric|digits:10',
+           'phone'      => 'required',
            'creditcard' => 'required|numeric|digits:16'
         ]);
 

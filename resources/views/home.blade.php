@@ -82,7 +82,8 @@
         <h4 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar al cliente?</h4>
       </div>
       <div class="modal-body">
-        
+        <div class="modal-body-content"></div>
+        <img src="/img/spinner.gif" alt="spinner" class="spinner">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -116,7 +117,7 @@
           </div>
           <div class="form-group">
             <label for="phone" class="control-label">Teléfono:</label>
-            <input type="text" class="form-control" id="phone" name="phone" maxlength="10">
+            <input type="text" class="form-control" id="phone" name="phone" maxlength="20">
           </div>
           <div class="form-group">
             <label for="creditcard" class="control-label">Tarjeta de Crédito:</label>
@@ -125,6 +126,7 @@
           <input type="hidden" name="customerid" id="customerid" value="">
           <input type="hidden" name="update" id="update" value="">
         </form>
+        <img src="/img/spinner.gif" alt="spinner" class="spinner">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

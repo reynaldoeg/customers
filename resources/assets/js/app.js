@@ -17,11 +17,13 @@ $('#deleteModal').on('show.bs.modal', function (event) {
   var name = button.data('name')
   var lastname = button.data('lastname')
   var modal = $(this)
-  modal.find('.modal-body').text(`${customerid} .- ${name} ${lastname}`)
+  modal.find('.modal-body-content').text(`${customerid} .- ${name} ${lastname}`)
   modal.find('.deleteCustomer').data('id', customerid)
 })
 
 $('.deleteCustomer').on('click', function(){
+  $('.spinner').css('display', 'block');
+
   var del_id= $(this).data('id')
   var $row = $('#row-'+del_id)
 
@@ -39,13 +41,17 @@ $('.deleteCustomer').on('click', function(){
         } else {
           alert('No se pudo eliminar el cliente')
         }
-        
+    },
+    complete: function(){
+      $('.spinner').css('display', 'none');
     }
   })
 });
 
 // ----- Modal Save ----------
 $('#save').on('click', function(){
+  $('.spinner').css('display', 'block');
+
   var customerid = $('#customerid').val()
   var name = $('#name').val()
   var lastname = $('#lastname').val()
@@ -83,6 +89,9 @@ $('#save').on('click', function(){
           alert(data.msg)
         }
         
+    },
+    complete: function(){
+      $('.spinner').css('display', 'none');
     }
   })
 });
