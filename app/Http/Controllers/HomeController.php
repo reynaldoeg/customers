@@ -71,6 +71,9 @@ class HomeController extends Controller
 
         $save = $customer->save();
 
-        return response()->json(['save' => $save], 200);
+        return response()->json([
+            'save' => $save,
+            'id' => $customer->id
+        ], 200);
     }
 }

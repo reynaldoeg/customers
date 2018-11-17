@@ -79,8 +79,39 @@ $('#save').on('click', function(){
           console.log('Guardado')
 
           if (update == 'save') {
-            var newrow = `<tr>
-                            <td>${name}</td><td>${lastname}</td><td>${email}</td><td>${phone}</td><td>${creditcard}</td><td></td><td></td></tr>`
+            var newrow = `<tr id="row-${data.id}">
+                            <td>${name}</td>
+                            <td>${lastname}</td>
+                            <td>${email}</td>
+                            <td>${phone}</td>
+                            <td>${creditcard}</td>
+                            <td>
+                                <button 
+                                    type="button" class="btn btn-default btn-sm edit" 
+                                    data-toggle="modal" data-target="#addModal" 
+                                    data-save="update" 
+                                    data-id="${data.id}" 
+                                    data-name="${name}" 
+                                    data-lastname="${lastname}" 
+                                    data-email="${email}" 
+                                    data-phone="${phone}" 
+                                    data-creditcard="${creditcard}" 
+                                    aria-label="Left Align">
+                                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button 
+                                    type="button" class="btn btn-danger btn-sm" 
+                                    data-toggle="modal" data-target="#deleteModal" 
+                                    data-id="${data.id}" 
+                                    data-name="${name}" 
+                                    data-lastname="${lastname}" 
+                                    aria-label="Left Align">
+                                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                          </tr>`
             $('table tbody').append(newrow)
           } else {
             var updatedrow = `<td>${name}</td>
@@ -88,8 +119,32 @@ $('#save').on('click', function(){
                               <td>${email}</td>
                               <td>${phone}</td>
                               <td>${creditcard}</td>
-                              <td></td>
-                              <td></td>`
+                              <td>
+                                  <button 
+                                      type="button" class="btn btn-default btn-sm edit" 
+                                      data-toggle="modal" data-target="#addModal" 
+                                      data-save="update" 
+                                      data-id="${customerid}" 
+                                      data-name="${name}" 
+                                      data-lastname="${lastname}" 
+                                      data-email="${email}" 
+                                      data-phone="${phone}" 
+                                      data-creditcard="${creditcard}" 
+                                      aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button 
+                                      type="button" class="btn btn-danger btn-sm" 
+                                      data-toggle="modal" data-target="#deleteModal" 
+                                      data-id="${customerid}" 
+                                      data-name="${name}" 
+                                      data-lastname="${lastname}" 
+                                      aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                  </button>
+                              </td>`
             $('#row-'+customerid).html(updatedrow)
           }
 
