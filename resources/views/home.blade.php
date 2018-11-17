@@ -38,7 +38,7 @@
                                     <td>{{$customer->creditcard}}</td>
                                     <td>
                                         <button 
-                                            type="button" class="btn btn-default edit" 
+                                            type="button" class="btn btn-default btn-sm edit" 
                                             data-toggle="modal" data-target="#addModal" 
                                             data-save="update" 
                                             data-id="{{$customer->id}}" 
@@ -53,7 +53,7 @@
                                     </td>
                                     <td>
                                         <button 
-                                            type="button" class="btn btn-danger" 
+                                            type="button" class="btn btn-danger btn-sm" 
                                             data-toggle="modal" data-target="#deleteModal" 
                                             data-id="{{$customer->id}}" 
                                             data-name="{{$customer->name}}" 

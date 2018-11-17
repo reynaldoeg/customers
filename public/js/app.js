@@ -1050,8 +1050,11 @@ $('#save').on('click', function () {
         console.log('Guardado');
 
         if (update == 'save') {
-          var newrow = '<tr><td>' + name + '</td><td>' + lastname + '</td><td>' + email + '</td><td>' + phone + '</td><td>' + creditcard + '</td><td></td><td></td></tr>';
+          var newrow = '<tr>\n                            <td>' + name + '</td><td>' + lastname + '</td><td>' + email + '</td><td>' + phone + '</td><td>' + creditcard + '</td><td></td><td></td></tr>';
           $('table tbody').append(newrow);
+        } else {
+          var updatedrow = '<td>' + name + '</td>\n                              <td>' + lastname + '</td>\n                              <td>' + email + '</td>\n                              <td>' + phone + '</td>\n                              <td>' + creditcard + '</td>\n                              <td></td>\n                              <td></td>';
+          $('#row-' + customerid).html(updatedrow);
         }
 
         $('#addModal').modal('hide');
