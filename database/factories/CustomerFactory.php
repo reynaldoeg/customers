@@ -7,7 +7,7 @@ $factory->define(App\Customer::class, function (Faker $faker) {
         'name' => $faker->name,
         'lastname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'phone' => $faker->phoneNumber,
+        'phone' => $faker->randomNumber(10),
         'creditcard' => $faker->creditCardNumber
     ];
 });

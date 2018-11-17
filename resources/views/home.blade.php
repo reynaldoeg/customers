@@ -24,6 +24,7 @@
                                 <th>Apellido</th>
                                 <th>E-mail</th>
                                 <th>Teléfono</th>
+                                <th>Tarjeta de Crédito</th>
                                 <th colspan="2"></th>
                             </tr>
                         </thead>
@@ -34,13 +35,18 @@
                                     <td>{{$customer->lastname}}</td>
                                     <td>{{$customer->email}}</td>
                                     <td>{{$customer->phone}}</td>
+                                    <td>{{$customer->creditcard}}</td>
                                     <td>
                                         <button 
-                                            type="button" class="btn btn-default" 
+                                            type="button" class="btn btn-default edit" 
                                             data-toggle="modal" data-target="#addModal" 
+                                            data-save="update" 
                                             data-id="{{$customer->id}}" 
                                             data-name="{{$customer->name}}" 
                                             data-lastname="{{$customer->lastname}}" 
+                                            data-email="{{$customer->email}}" 
+                                            data-phone="{{$customer->phone}}" 
+                                            data-creditcard="{{$customer->creditcard}}" 
                                             aria-label="Left Align">
                                           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </button>
@@ -60,6 +66,8 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    {!! $customers->render() !!}
                 </div>
             </div>
         </div>
@@ -114,6 +122,8 @@
             <label for="creditcard" class="control-label">Tarjeta de Crédito:</label>
             <input type="text" class="form-control" id="creditcard" name="creditcard" maxlength="16">
           </div>
+          <input type="hidden" name="customerid" id="customerid" value="">
+          <input type="hidden" name="update" id="update" value="">
         </form>
       </div>
       <div class="modal-footer">

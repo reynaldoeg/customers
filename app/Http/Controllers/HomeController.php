@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -25,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        //$customers = Customer::all();
+        $customers = Customer::paginate(5);
         return view('home')->with('customers', $customers);
     }
 
@@ -41,23 +43,25 @@ class HomeController extends Controller
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
-           'name'       => 'required|alpha|max:50',
-           'lastname'   => 'required|alpha|max:50',
-           'email'      => 'required|email|unique:customers',
+           'name'       => 'required|string|max:50',
+           'lastname'   => 'required|string|max:50',
+           'email'      => ['required','email',Rule::unique('customers')->ignore($request->id)],
            'phone'      => 'required|numeric|digits:10',
            'creditcard' => 'required|numeric|digits:16'
         ]);
 
         if ($validator->fails()) {
-            //Session::flash('error', $validator->messages()->first());
-            //return redirect()->back()->withInput();
             return response()->json([
                 'save' => 'error',
                 'msg' => $validator->messages()->first()
             ], 200);
         }
 
-        $customer = new Customer;
+        if ($request->update == 'save') {
+            $customer = new Customer; // Cliente Nuevo
+        } else {
+            $customer = Customer::find($request->id); // Actualizar Cliente
+        }
 
         $customer->name = $request->name;
         $customer->lastname = $request->lastname;
@@ -67,7 +71,6 @@ class HomeController extends Controller
 
         $save = $customer->save();
 
-        $name = $request->input('name');
         return response()->json(['save' => $save], 200);
     }
 }
