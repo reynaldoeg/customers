@@ -103,6 +103,7 @@
       </div>
       <div class="modal-body">
         <form>
+          {{ csrf_field() }}
           <div class="form-group">
             <label for="name" class="control-label">Nombre:</label>
             <input type="text" class="form-control" id="name" name="name">
