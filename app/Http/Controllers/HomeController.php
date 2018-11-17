@@ -27,4 +27,13 @@ class HomeController extends Controller
         $customers = Customer::all();
         return view('home')->with('customers', $customers);
     }
+
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+
+        $del = Customer::destroy($id);
+
+        return response()->json(['delete' => $del], 200);
+    }
 }
